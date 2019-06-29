@@ -34,7 +34,7 @@ NetworkServer.Spawn() is the only way to make a network object appear on all of 
 
 _Update_ runs on everyones computer whether or not they own the particular object.
 
-_Commands_ are special functions that *only* get executed on the server.  Command methods in Unity must have the Command attribute, and the method must be prefixed with *Cmd*
+_Commands_ are special functions that *only* get executed on the server.  Command methods in Unity must have the Command attribute, and the method must be prefixed with *Cmd.  The code is called by the client, but then is executed on the server.
 
 Any networked object that is going to be spawned in your game must be registerd in the _Registered Spawnable Prefabs_ list on the Network Manager.
 
@@ -42,4 +42,16 @@ When actions happen on behalf of the server, they must be propagated back to all
 
 The _Network Transform_ component comes with the Networking Package and communicates transform changes to the client.
 
-_Remote Procedure Calls (RPCS)_ are similar to commands, but they only get ran by clients.
+_Remote Procedure Calls (RPCS)_ are similar to commands, but they only get ran by clients.  All remote procedure calls must begin with te _RPC_ attribute.
+
+_Rubberbanding_ occurs when the client player makes an illegal action that is rejected by the server causing the client to _rubberband_ back to their previous location.
+
+_SyncVars_ are variables where if their value changes on the *_server_*, then all clients are automatically informed of the new value.  They help alleviate the need for explicitly calling RPC's when making networked variables.  To define a _SyncVar_ variable, you can add the *[SyncVar]* attribute to the variable that you would like to sync.  You can also add a hook to your attribute, i.e. [SyncVar("MethodToRun")] to call specific functions when a SyncVar is updated.  If you use a hook on a SyncVar, your local value does *_not_* get automatically updated.
+
+Mantra suggested by Quill: 
+1) Don't update what hasn't changed
+2) Use prediction when possible
+3) Figure out what is deterministic
+4) Minimize network updates
+
+Generally, we do not want to directly update transform.position through the network because the players will teleport/blink to the location as the udpates come in. Instead, we want to predict where the player is supposed to be, and then update on the client side to get them to that location.
