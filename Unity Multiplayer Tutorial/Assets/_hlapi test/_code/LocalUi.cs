@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using TMPro;
 
-public class Move : NetworkBehaviour
+public class LocalUi : NetworkBehaviour
 {
+    public TextMeshProUGUI playerNameText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,14 +18,10 @@ public class Move : NetworkBehaviour
     void Update()
     {
         
-        if (!hasAuthority)
-        {
-            return;
-        }
+    }
 
-        if (Input.GetKeyUp("space"))
-        {
-            this.transform.Translate(Vector3.up);
-        }
+    public void UpdatePlayerNameText(string txt)
+    {
+        playerNameText.text = txt;
     }
 }

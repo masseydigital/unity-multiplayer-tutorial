@@ -1,9 +1,9 @@
 # unity-multiplayer-tutorial
-Learning multiplayer with Unity. The first part of this repo is going through _quill18creates_ youtube tutorial series for creating multiplayer games using Unity's Multiplayer HLAPI. *The Unity Multiplayer HLAPI is deprecated and will be replaced soon with their new networking system*. The second part of this repo is going to be a short demo of a test game I built with the HLAPI. 
+Learning multiplayer with Unity. The first part of this repo is going through _quill18creates_ youtube tutorial series for creating multiplayer games using Unity's Multiplayer HLAPI. *The Unity Multiplayer HLAPI is deprecated and will be replaced soon with their new networking system*. The second part of this repo is going to be a short demo of a test game I built with the HLAPI.   After that I'll go into how to use the new Network Layer.
 
 ## Quick Start
 
-1) Create a Unity 2019.1.
+1) Create a Unity 2019.1 project.
 
 2) Install the Multiplayer HLAPI package from the package manager.
 
@@ -19,7 +19,7 @@ Learning multiplayer with Unity. The first part of this repo is going through _q
 
 8) Hit play and observe
 
-## Concepts
+## Hlapi Concepts
 A Unity application by default can act as both a server and a client.  
 
 Each player in your networked game should have it's own _Player_ object.  It is recommended that the Player object is not a physical object in the game - this is due to how Unity interacts with objects in the scene.  Player objects must contain a Network Identity.
